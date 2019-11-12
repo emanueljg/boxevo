@@ -29,7 +29,7 @@ food_spawn_increment = 2, 5
 
 # Statistics
 auto_start_scatter = True
-kill_on_main_exit = False
+kill_on_main_exit = True
 
 noting_counter = 100
 old_values_timer = 2
@@ -37,7 +37,7 @@ pause_timer = 2
 
 # Window
 
-main_executable = 'boxevo'
+main_executable = 'boxevo.exe'
 manual_dims = (1680, 863)
 
 window_roof_offset = 31
@@ -50,4 +50,8 @@ border_height_factor = 0.98
 border_thick = 3
 border_color = (255, 255, 255, 255)
 
+death_marker_duration = 22
+death_marker_color = (255, 0, 0)  # Red
 
+birth_marker_duration = 22
+birth_marker_color = (0, 255, 0)  # Green

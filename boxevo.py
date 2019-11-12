@@ -1,7 +1,7 @@
 import pygame as pg
 
 from game_setup import startup, get_screen, draw_border
-from sprite import EntityGroup, FoodGroup
+from sprite import EntityGroup, FoodGroup, MarkerSpriteGroup
 
 from importlib.machinery import SourceFileLoader
 
@@ -10,12 +10,16 @@ cfg = SourceFileLoader('config', './config.py').load_module()
 
 def main():
     startup()
-    entities, foods = EntityGroup(), FoodGroup()
+    entities = EntityGroup()
+    foods = FoodGroup()
+    birth_markers = MarkerSpriteGroup(cfg.birth_marker_duration, cfg.birth_marker_color)
+    death_markers = MarkerSpriteGroup(cfg.death_marker_duration, cfg.death_marker_color)
 
     entities.populate(placement=None,
                       energy=cfg.start_energy,
                       speed=cfg.start_speed,
-                      size=cfg.start_size)
+                      size=cfg.start_size,
+                      birth_marker_group=birth_markers)
 
     clock = pg.time.Clock()
 
@@ -29,7 +33,9 @@ def main():
         draw_border()
 
         foods.spawn()
-        entities.loop(entities=entities, foods=foods)
+        entities.loop(entities=entities, foods=foods, birth_marker_group=birth_markers, death_marker_group=death_markers)
+        birth_markers.loop()
+        death_markers.loop()
 
         pg.display.flip()
         clock.tick(60)

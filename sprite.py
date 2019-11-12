@@ -60,7 +60,7 @@ class Entity(pg.sprite.Sprite):
             else:
                 self.rect.right += self.speed
 
-    def mate(self, entities):
+    def mate(self, entities, birth_marker_group):
         partners = pg.sprite.spritecollide(self, entities, dokill=False)
         if len(partners) == 2:
             if prob('x', cfg.mating_chance):
@@ -85,7 +85,8 @@ class Entity(pg.sprite.Sprite):
                     entities.populate(placement=(self.rect.x, self.rect.y),
                                       energy=(2 * greater_cost),
                                       speed=(speedmin, medianspeed + cfg.gene_variation),
-                                      size=(sizemin, mediansize + cfg.gene_variation))
+                                      size=(sizemin, mediansize + cfg.gene_variation),
+                                      birth_marker_group=birth_marker_group)
                     self.mating, partner.mating = 0, 0
                     self.energy -= greater_cost
                     partner.energy -= greater_cost
@@ -95,10 +96,12 @@ class Entity(pg.sprite.Sprite):
         for _ in foods:
             self.energy += cfg.food_energy
 
-    def die(self, entities):
+    def die(self, entities, death_marker_group):
         if self.energy < 0:
+            death_marker_group.create(self)
             entities.remove(self)
         elif prob(cfg.old_age_formula, self.age):
+            death_marker_group.create(self)
             entities.remove(self)
 
     def modify_values(self):
@@ -109,11 +112,11 @@ class Entity(pg.sprite.Sprite):
         dir_a, dir_b = cfg.direction_speed_decrement
         self.direction_counter -= randint(self.speed // dir_b + 1, self.speed // dir_a + 1)
 
-    def update(self, entities, foods):
+    def update(self, entities, foods, birth_marker_group, death_marker_group):
         self.move()
-        self.mate(entities)
+        self.mate(entities, birth_marker_group)
         self.eat(foods)
-        self.die(entities)
+        self.die(entities, death_marker_group)
         self.modify_values()
 
 
@@ -122,7 +125,7 @@ class EntityGroup(pg.sprite.Group):
         super().__init__()
         self.noting = 0
 
-    def populate(self, placement, energy, **weighted_kwargs):
+    def populate(self, placement, energy, birth_marker_group, **weighted_kwargs):
         n = 1 if placement is not None else cfg.start_amount
 
         for _ in range(n):
@@ -135,6 +138,7 @@ class EntityGroup(pg.sprite.Group):
                 entity.rect.center = (placement[0], placement[1])
 
             self.add(entity)
+            birth_marker_group.create(entity)
 
     def note_entities(self):
         if self.noting == cfg.noting_counter:
@@ -150,8 +154,8 @@ class EntityGroup(pg.sprite.Group):
 
         self.noting += 1
 
-    def loop(self, entities, foods):
-        self.update(entities, foods)
+    def loop(self, entities, foods, birth_marker_group, death_marker_group):
+        self.update(entities, foods, birth_marker_group, death_marker_group)
         self.note_entities()
         self.draw(get_screen())
 
@@ -181,3 +185,35 @@ class FoodGroup(pg.sprite.Group):
             self.burst_counter += randint(*cfg.food_spawn_increment)
 
         self.draw(get_screen())
+
+
+class MarkerSprite(pg.sprite.Sprite):
+    def __init__(self, marked, duration, color):
+        super().__init__()
+        self.marked = marked
+        self.duration = duration
+        self.duration_counter = 0
+        self.image = pg.Surface((self.marked.size, self.marked.size))
+        self.image.fill(color)
+        self.rect = self.image.get_rect()
+        self.rect.center = (self.marked.rect.x, self.marked.rect.y)
+
+    def update(self):
+        self.duration_counter += 1
+        if self.duration_counter == self.duration:
+            self.kill()
+
+
+class MarkerSpriteGroup(pg.sprite.Group):
+    def __init__(self, duration, color):
+        super().__init__()
+        self.duration = duration
+        self.color = color
+
+    def create(self, marked):
+        self.add(MarkerSprite(marked, self.duration, self.color))
+
+    def loop(self):
+        self.update()
+        self.draw(get_screen())
+

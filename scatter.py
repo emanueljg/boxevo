@@ -64,6 +64,5 @@ def main():
     ani = matplotlib.animation.FuncAnimation(Scatter.fig, animate, interval=1, repeat=True)
     plt.show()
 
-
 if __name__ == '__main__':
     main()
