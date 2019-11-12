@@ -5,8 +5,9 @@ import psutil
 import sys
 
 from time import sleep
+from importlib.machinery import SourceFileLoader
 
-from game_setup import get_vars
+cfg = SourceFileLoader('config', './config.py').load_module()
 
 
 class Scatter:
@@ -18,29 +19,22 @@ class Scatter:
     source_x, source_y = [], []
     sc = ax.scatter(x, y)
 
-    vars = get_vars('constants.yaml')['statistics']
-    kill_on_main_exit = vars['kill_on_main_exit']
-    old_values_timer = vars['old_values_timer']
-    pause_timer = vars['pause_timer']
-
 
 def animate(i):
-
-    if Scatter.kill_on_main_exit and 'pyvolution' not in (p.name() for p in psutil.process_iter()):
+    if cfg.kill_on_main_exit and cfg.main_executable not in (p.name() for p in psutil.process_iter()):
         sys.exit()
 
     if Scatter.counter + 1 > len(Scatter.source_x):
         Scatter.counter = 0
 
     if Scatter.counter == 0:
-        if i != 0:
-            sleep(Scatter.pause_timer)  # We don't want to sleep right when starting the program!
+        if i != 0: sleep(cfg.pause_timer)  # We don't want to sleep right when the program is starting up!
 
         while True:
             with open('values.txt', 'r') as f:
                 values = f.readlines()
             if Scatter.old_values == values:
-                sleep(Scatter.old_values_timer)  # Wait until we get new vales
+                sleep(cfg.old_values_timer)  # Wait until we get new vales
             else:
                 break
 
@@ -71,4 +65,5 @@ def main():
     plt.show()
 
 
-main()
+if __name__ == '__main__':
+    main()

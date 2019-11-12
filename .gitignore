@@ -2,6 +2,7 @@ vcs.xml
 boxevo.iml
 modules.xml
 workspace.xml
+misc.xml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
