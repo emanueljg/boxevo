@@ -28,8 +28,8 @@ food_counter = 200
 food_spawn_increment = 2, 5
 
 # Statistics
-auto_start_scatter = True
-kill_on_main_exit = True
+auto_start_scatter = False
+kill_on_main_exit = False
 
 noting_counter = 100
 old_values_timer = 2
@@ -50,8 +50,13 @@ border_height_factor = 0.98
 border_thick = 3
 border_color = (255, 255, 255, 255)
 
-death_marker_duration = 22
-death_marker_color = (255, 0, 0)  # Red
+starve_marker_duration = 22
+starve_marker_color = (255, 0, 0)  # Red
+
+rot_marker_duration = 22
+rot_marker_color = (255, 128, 0)  # Orange
 
 birth_marker_duration = 22
 birth_marker_color = (0, 255, 0)  # Green
+
+

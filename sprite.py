@@ -96,12 +96,12 @@ class Entity(pg.sprite.Sprite):
         for _ in foods:
             self.energy += cfg.food_energy
 
-    def die(self, entities, death_marker_group):
+    def die(self, entities, starve_marker_group, rot_marker_group):
         if self.energy < 0:
-            death_marker_group.create(self)
+            starve_marker_group.create(self)
             entities.remove(self)
         elif prob(cfg.old_age_formula, self.age):
-            death_marker_group.create(self)
+            rot_marker_group.create(self)
             entities.remove(self)
 
     def modify_values(self):
@@ -112,11 +112,11 @@ class Entity(pg.sprite.Sprite):
         dir_a, dir_b = cfg.direction_speed_decrement
         self.direction_counter -= randint(self.speed // dir_b + 1, self.speed // dir_a + 1)
 
-    def update(self, entities, foods, birth_marker_group, death_marker_group):
+    def update(self, entities, foods, birth_marker_group, starve_marker_group, rot_marker_group):
         self.move()
         self.mate(entities, birth_marker_group)
         self.eat(foods)
-        self.die(entities, death_marker_group)
+        self.die(entities, starve_marker_group, rot_marker_group)
         self.modify_values()
 
 
@@ -154,8 +154,8 @@ class EntityGroup(pg.sprite.Group):
 
         self.noting += 1
 
-    def loop(self, entities, foods, birth_marker_group, death_marker_group):
-        self.update(entities, foods, birth_marker_group, death_marker_group)
+    def loop(self, entities, foods, birth_marker_group, starve_marker_group, rot_marker_group):
+        self.update(entities, foods, birth_marker_group, starve_marker_group, rot_marker_group)
         self.note_entities()
         self.draw(get_screen())
 

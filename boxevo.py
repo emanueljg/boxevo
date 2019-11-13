@@ -13,7 +13,8 @@ def main():
     entities = EntityGroup()
     foods = FoodGroup()
     birth_markers = MarkerSpriteGroup(cfg.birth_marker_duration, cfg.birth_marker_color)
-    death_markers = MarkerSpriteGroup(cfg.death_marker_duration, cfg.death_marker_color)
+    starve_markers = MarkerSpriteGroup(cfg.starve_marker_duration, cfg.starve_marker_color)
+    rot_markers = MarkerSpriteGroup(cfg.rot_marker_duration, cfg.rot_marker_color)
 
     entities.populate(placement=None,
                       energy=cfg.start_energy,
@@ -33,9 +34,15 @@ def main():
         draw_border()
 
         foods.spawn()
-        entities.loop(entities=entities, foods=foods, birth_marker_group=birth_markers, death_marker_group=death_markers)
+        entities.loop(entities=entities,
+                      foods=foods,
+                      birth_marker_group=birth_markers,
+                      starve_marker_group=starve_markers,
+                      rot_marker_group=rot_markers)
+
         birth_markers.loop()
-        death_markers.loop()
+        starve_markers.loop()
+        rot_markers.loop()
 
         pg.display.flip()
         clock.tick(60)
