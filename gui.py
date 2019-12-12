@@ -1,15 +1,19 @@
+"""This module handles abstracted-away gui methods related to PyGame."""
+
+
 import pygame as pg
-
 from os import environ
-from random import random
-from win32api import WinExec
 
-from importlib.machinery import SourceFileLoader
+from config_handling import get_cfg
 
-cfg = SourceFileLoader('config', './config.py').load_module()
+cfg = get_cfg()
 
 
 def prep():
+    """Initial preparations for the main window.
+
+    Dimensions will be manually or dynamically set depending on ``config.py``.
+    """
     pg.init()
     environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" % (0, cfg.window_roof_offset)
 
@@ -21,15 +25,24 @@ def prep():
         pg.display.set_mode((cfg.manual_dims[0],
                              cfg.manual_dims[1] - cfg.window_roof_offset - cfg.window_floor_offset))
 
-    if cfg.auto_start_scatter:
-        WinExec(cfg.statistics_executable)
 
 
 def get_screen() -> pg.Surface:
+    """Get the PyGame display surface.
+
+    :return: The display surface.
+    :rtype: PyGame.Surface
+    """
     return pg.display.get_surface()
 
 
 def draw_border() -> pg.Rect:
+    """Draw the PyGame border rect and return it.
+
+    The border rect will be drawn as a border, not an opaque rectangle.
+
+    :return: The border rect.
+    """
     width, height = get_screen().get_size()
     return pg.draw.rect(get_screen(),
                         cfg.border_color,
