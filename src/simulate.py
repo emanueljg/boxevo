@@ -4,7 +4,7 @@ from time import strftime, time, sleep
 from os import path, mkdir, system, listdir
 from shutil import copy2, SameFileError
 
-from src.config_handling import get_cfg
+from config_handling import get_cfg
 
 cfg = get_cfg()
 

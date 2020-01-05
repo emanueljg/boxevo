@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import re
 import os
 
-from src.config_handling import get_cfg
+from config_handling import get_cfg
 
 cfg = get_cfg()
 

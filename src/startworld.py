@@ -12,9 +12,9 @@ import pygame as pg
 from timeit import default_timer as timer
 from sys import argv
 
-from src.config_handling import get_cfg
-from src.gui import prep, get_screen, draw_border
-from src.sprite import EntityGroup, FoodGroup, MarkerGroup
+from config_handling import get_cfg
+from gui import prep, get_screen, draw_border
+from sprite import EntityGroup, FoodGroup, MarkerGroup
 
 cfg = get_cfg()
 

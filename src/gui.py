@@ -4,7 +4,7 @@
 import pygame as pg
 from os import environ
 
-from src.config_handling import get_cfg
+from config_handling import get_cfg
 
 cfg = get_cfg()
 
