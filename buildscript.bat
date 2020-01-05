@@ -1,30 +1,13 @@
-@echo off
+rd /s /q simulation
+mkdir simulation\bundle
 
-set /P version="Enter version identifier: " 
+pyinstaller simulate.py --distpath simulation --onefile
+pyinstaller startworld.py --distpath simulation\bundle --onefile
+pyinstaller graph.py --distpath simulation\bundle --onefile
 
-echo REMOVING OLD DIST FOLDER
-rmdir /s /q dist
-echo INSTALLING MAIN SCRIPT - BOXEVO.PY
-pyinstaller boxevo.py --onefile
-echo INSTALLING SCATTER SCRIPT - SCATTER.PY
-pyinstaller scatter.py --onefile
-echo COPYING CONSTANTS.YAML TO DIST
-copy config.py dist
-echo COPYING OPTIMUSFLY.PNG TO DIST
-copy optimusfly.png dist
-echo COPYING DEBUG.BAT TO DIST
-copy debug.bat dist
+copy config.py simulation\bundle
+copy optimusfly.png simulation\bundle
 
-echo COPYING SRC TO DIST
-mkdir src
-copy boxevo.py src
-copy buildscript.bat src
-copy config.py src
-copy game_setup.py src
-copy scatter.py src
-copy sprite.py src
-mv src\ dist\
+# Xcopy /e simulation "C:\Users\eman286a\Ystads Kommun\Rosengren Asp Arvid - Gymnasiearbete\%version%\"
 
-echo COPYING DIST TO WORK FOLDER WITH NAME %version%
-Xcopy /e dist "C:\Users\eman286a\Ystads Kommun\Rosengren Asp Arvid - Gymnasiearbete\%version%\"
-echo ALL DONE!
+PAUSE

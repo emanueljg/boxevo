@@ -1,5 +1,5 @@
-config\_handling module
-=======================
+config\_handling
+================
 
 .. automodule:: config_handling
    :members:

@@ -7,17 +7,15 @@ Welcome to boxevo's documentation!
 ==================================
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Modules:
 
-   boxevo.rst
+   startworld.rst
+   sprite.rst
+   graph.rst
+   simulate.rst
+   gui.rst
    config.rst
    config_handling.rst
-   gui.rst
-   scatter.rst
-   sprite.rst
-
-
-
 
 Indices and tables
 ==================

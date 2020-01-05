@@ -1,7 +1,7 @@
-sprite
-======
+startworld
+==========
 
-.. automodule:: sprite
+.. automodule:: startworld
    :members:
    :undoc-members:
    :show-inheritance:

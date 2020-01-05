@@ -1,7 +1,7 @@
-scatter module
-==============
+simulate
+========
 
-.. automodule:: scatter
+.. automodule:: simulate
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,7 +1,7 @@
-boxevo module
-=============
+graph
+=====
 
-.. automodule:: boxevo
+.. automodule:: graph
    :members:
    :undoc-members:
    :show-inheritance:

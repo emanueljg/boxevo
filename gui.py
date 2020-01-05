@@ -1,4 +1,4 @@
-"""This module handles abstracted-away gui methods related to PyGame."""
+"""This module handles abstracted-away gui methods related to `PyGame <https://www.pygame.org>`."""
 
 
 import pygame as pg

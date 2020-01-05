@@ -1,2 +1,2 @@
-boxevo.exe
+startworld.exe
 PAUSE
