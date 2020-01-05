@@ -15,7 +15,7 @@ import sys
 print(os.getcwd())
 sys.path.insert(0, os.path.abspath('../../src'))
 master_doc = 'index'
-autodoc_mock_imports = ['pypiwin32']
+autodoc_mock_imports = ['win32process']
 
 #sys.path.insert(0, os.path.abspath('..'))
 
