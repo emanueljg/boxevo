@@ -8,6 +8,4 @@ pyinstaller graph.py --distpath simulation\bundle --onefile
 copy config.py simulation\bundle
 copy optimusfly.png simulation\bundle
 
-# Xcopy /e simulation "C:\Users\eman286a\Ystads Kommun\Rosengren Asp Arvid - Gymnasiearbete\%version%\"
-
 PAUSE

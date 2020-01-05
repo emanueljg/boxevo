@@ -1,1 +1,0 @@
-pyinstaller graph.py --distpath "simulation\Thu 22.43, 26 Dec" --onefile
