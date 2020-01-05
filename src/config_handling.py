@@ -30,8 +30,7 @@ def get_cfg():
     try:
         return SourceFileLoader('config', path.join(pth, 'config.py')).load_module()
     except FileNotFoundError:
-        exit(f'ERROR: "{path.basename(argv[0])}" could not find or reach config.py from current working directory "{cwd}".'
-             '\nExiting...')
+        print(f'ERROR: "{path.basename(argv[0])}" could not find or reach config.py from current working directory "{cwd}".')
 
 
 def formula(f, **kwargs) -> float:
