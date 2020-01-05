@@ -40,7 +40,7 @@ min_speed = 1
 #: Minimal size for an entity. If it is lower than this, it is automatically set to this value.
 min_size = 1
 #: Image of the entity.
-entity_image = 'animal.png'
+entity_image = 'entity.png'
 
 
 """

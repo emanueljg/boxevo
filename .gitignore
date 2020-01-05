@@ -5,6 +5,10 @@ workspace.xml
 misc.xml
 .idea/
 
+# date-named directories (which we don't want) will always contain a comma.
+simulation/*,*/*
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

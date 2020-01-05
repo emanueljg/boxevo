@@ -1,7 +1,6 @@
 @echo off
 
-rd simulation\bundle
-del simulation\simulate.exe
+rd /s /q simulation
 
 curl -L -O https://codeload.github.com/NihilistBrew/boxevo/zip/master
 tar xf master
