@@ -1,0 +1,6 @@
+spinx:
+  configuration: docs/source/conf.py
+python:
+  install:
+    - requirements: docs/source/requirements.txt
+  system_packages: true
