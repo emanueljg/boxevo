@@ -1,4 +1,4 @@
-pywin32==224
+pypiwin32==220
 alabaster==0.7.12
 altgraph==0.16.1
 Babel==2.7.0
