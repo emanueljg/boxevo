@@ -40,9 +40,8 @@ min_speed = 1
 #: Minimal size for an entity. If it is lower than this, it is automatically set to this value.
 min_size = 1
 #: Image of the entity.
-entity_image = 'optimusfly.png'
+entity_image = 'animal.png'
 
-# test
 
 """
 
@@ -62,7 +61,7 @@ food_spawn_counter_roof = 200
 #: A random range (min, max) of how much the food_spawn_counter is incremented by.
 food_spawn_counter_increment = (2, 5)
 #: Image of the food sprite.
-food_image = 'optimusfly.png'
+food_image = 'food.png'
 
 """
 

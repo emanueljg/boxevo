@@ -1,2 +1,0 @@
-startworld.exe
-PAUSE
