@@ -14,6 +14,7 @@ import os
 import sys
 print(os.getcwd())
 sys.path.insert(0, os.path.abspath('../../src'))
+master_doc = 'index'
 
 
 #sys.path.insert(0, os.path.abspath('..'))
