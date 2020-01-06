@@ -1,4 +1,4 @@
 
-.. mdinclude:: markdowns\01_installation.md
-.. mdinclude:: markdowns\02_usage.md
-.. mdinclude:: markdowns\04_license.md
+.. mdinclude:: 01_installation.md
+.. mdinclude:: 02_usage.md
+.. mdinclude:: 04_license.md
