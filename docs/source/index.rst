@@ -14,8 +14,8 @@ Info
 
    info.rst
 
-Modulesss
----------
+Modules
+-------
 
 .. toctree::
    :maxdepth: 2
