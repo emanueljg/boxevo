@@ -14,7 +14,7 @@ import os
 import sys
 print(os.getcwd())
 sys.path.insert(0, os.path.abspath('../../src'))
-master_doc = 'index.rst'
+master_doc = 'index'
 autodoc_mock_imports = ['win32process']
 source_suffix = ['.rst', '.md']
 
