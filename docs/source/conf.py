@@ -16,6 +16,7 @@ print(os.getcwd())
 sys.path.insert(0, os.path.abspath('../../src'))
 master_doc = 'index'
 autodoc_mock_imports = ['win32process']
+source_suffix = ['.rst', '.md']
 
 #sys.path.insert(0, os.path.abspath('..'))
 
@@ -33,7 +34,8 @@ author = 'Emanuel Johnson Godin'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc'
+    'sphinx.ext.autodoc',
+    'm2r'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
