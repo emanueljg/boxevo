@@ -4,9 +4,11 @@ SETLOCAL EnableDelayedExpansion
 for %%I in (.) do set base=%%~nxI
 if not "!base!"=="tools" (cd tools)
 
-make_simulation
-make_config_doc
-make_readme
+call make_simulation
+call make_config_doc
+call make_readme
 
-git add ..\*
+call git commit -a -m update
+call git push
+
 ENDLOCAL

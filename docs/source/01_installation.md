@@ -14,10 +14,12 @@ Link to .zip: https://github.com/NihilistBrew/boxevo/archive/master.zip
 
 #### Using get\_simulation.bat
 
+**This will wipe an already existing `simulation` directory!**
+
 -   Create a `.txt` file and paste the following into it:
 
 ``` {.bash}
-# From tools\get_simulation.bat
+REM from tools\get_simulation.bat
 
 @echo off
 rd /s /q simulation
@@ -41,19 +43,14 @@ process is done, subsequently closing the command prompt.
 
 #### Using build\_simulation.bat
 
+**This will wipe an already existing `simulation` directory!**
+
 If you want to, you can compile the `simulation` directory and its
 content straight from source. A new `simulation` directory will be
-created, wiping the old one in the process.
+created.
 
 After having cloned or downloaded the repository, run
 `build_simulation`.
 
 **NOTE**: If you want to run the script through the command line, the
-current working directory **has** to be tools in order for the script to
-work!
-
-Example:
-
-``` {.bash}
-cd [path-to-root]\tools & build_simulation
-```
+current working directory **has** to be `tools` or one directory above it, i.e **the repository directory!**
