@@ -1,4 +1,4 @@
-"""This module handles variable graphing using `matplotlib <https://matplotlib.org/>`."""
+"""This module handles variable graphing using `matplotlib <https://matplotlib.org/>`_."""
 
 import matplotlib.pyplot as plt
 import re
@@ -18,10 +18,10 @@ def construct_graph(x, y, title, fname, **kwargs):
     :type y: list
     :param title: The title of the graph, either as a template string or not.
     :type title: str
-    :param fname: The file name of the graph, either as a template string or not.
+    :param fname: The file name of the graph or a template string for it.
     :type fname: str
-    :param kwargs: Translation dict for chained replace calls.
-    :type kwargs: str
+    :param kwargs: Translation dict for chained `replace <https://docs.python.org/3/library/stdtypes.html#str.replace>`_ calls.
+    :type kwargs: str, optional
     """
     for to_translate, translation in kwargs.items():
         title = title.replace(to_translate, translation)

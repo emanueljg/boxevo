@@ -4,16 +4,14 @@
 
 #: Amount of entities to first spawn.
 start_amount = 15
-#: A random range (min, max) of the start size of entities.
+#: A random interval of the start size of entities.
 start_size = (30, 60)
-#: A random range (min, max) of the start speed of entities
+#: A random interval (min, max) of the start speed of entities
 start_speed = (3, 6)
 #: How much energy the entities start with.
 start_energy = 200000
 #: How much energy is drained each turn, depending on speed and size.
 energy_drain_formula = '0.3*speed*size'
-#: How much energy each food sprite gives.
-food_energy = 5000
 #: The odds of a mating occurring when two entities collide.
 mating_chance = 0.1
 #: How big the mating counter has to be to mate.
@@ -22,19 +20,20 @@ mating_counter_roof = 2000
 mating_age_counter_roof = 800
 #: How much energy is drained from a parent, dependent on energy.
 mating_energy_formula = '0.25*energy'
-#: The minimum energy drain from a parent (for when the parent's energy is too low)
+#: The minimum energy drain from a parent
+#:  (for when the parent's energy is too low to be transferred proportionally).
 mating_energy_formula_min = 1000
-#: (min, max) of how much the average of the parent's speed genes are shifted.
+#: A random interval of how much the average of the parents' speed genes are shifted.
 speed_variation = (2, 4)
-#: (min, max) of how much the average of the parent's size genes are shifted.
+#: A random interval of how much the average of the parents' size genes are shifted.
 size_variation = (2, 4)
-#: Random (min, max) range of how much the direction counter is incremented by.
+#: A random interval of how much the direction counter is incremented by.
 direction_counter_increment = (1, 10)
 #: How big the direction counter has to be to change direction.
 direction_counter_roof = 100
-#: Minimal speed for an entity. If it is lower than this, it is automatically set to this value.
+#: Minimal speed for an entity. If the entity speed is lower than this, it is automatically set to this value.
 min_speed = 1
-#: Minimal size for an entity. If it is lower than this, it is automatically set to this value.
+#: Minimal size for an entity. If the entity size is lower than this, it is automatically set to this value.
 min_size = 1
 #: Image of the entity.
 entity_image = 'entity.png'
@@ -45,11 +44,13 @@ entity_image = 'entity.png'
 food_size = 10
 #: How many food sprites are spawned each turned.
 food_amount = 10
+#: How much energy each food sprite gives.
+food_energy = 5000
 #: How big the counter has to be to spawn the food.
 food_spawn_counter_roof = 200
-#: A random range (min, max) of how much the food_spawn_counter is incremented by.
+#: A random interval of how much the spawn_counter is incremented by.
 food_spawn_counter_increment = (2, 5)
-#: Image of the food sprite.
+#: Image of the food.
 food_image = 'food.png'
 
 ############marker############

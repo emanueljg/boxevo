@@ -5,8 +5,8 @@
 
 The sprite classes here are all subclasses of Pygame's Sprite_ class.
 
-- :class:`Entity` handles the living creature
-- :class:`Food` handles the food
+- :class:`Entity` handles the living creature.
+- :class:`Food` handles the food.
 - :class:`Marker` handles visual representation of events.
 
 Each group has an accompanying Group in order to deal with all of the sprites as a collection (subclassing Group_):
@@ -15,7 +15,7 @@ Each group has an accompanying Group in order to deal with all of the sprites as
 - :class:`FoodGroup`
 - :class:`MarkerGroup`
 """
-# TODO add dunder properties
+
 import pygame as pg
 
 from random import randint, choice
@@ -32,28 +32,27 @@ class Entity(pg.sprite.Sprite):
     .. _Sprite: https://www.pygame.org/docs/ref/sprite.html
     .. _Sprite.update: https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite.update
 
-    A subclass of Pygame's Sprite_ class that allows for automated method calls each
+    A subclass of PyGame's Sprite_ class that allows for automated method calls each
     game loop iteration, "action(s)", essentially giving the sprite its *life*.
     This is done by overriding Sprite.update_, a placeholder method that is called with :meth:`EntityGroup.update`
-    and it's arguments. The overridden method contains all actions:
+    and its arguments. The overridden method contains all actions:
     moving, mating, eating, dying and modification of values.
 
-    :param energy: How much energy it has, depleted each turn by a formula (from ``config.py``) using ``speed`` and ``size``
+    :param energy: How much energy it has, depleted each turn by a formula (from :mod:`config`) using ``speed`` and ``size``
     :type energy: int
-    :param speed: How fast it moves each turn ``self.rect.(direction) += speed``.
+    :param speed: How fast it moves each turn, ``self.rect.(direction) += speed``.
     :type speed: int
     :param size: How big is is, in pixels (quadratic).
     :type size: int
     :param mating_counter: To see if it can mate or not, ``counter > counter_check`` is a requirement in :meth:`mate`.
     :type mating_counter: int
-    :param age_counter: Its age. Mostly checked in :meth:`die` and :meth:`mate`.
+    :param age_counter: Its age. Mostly used in :meth:`die` and :meth:`mate`.
     :type age_counter: int
     :param image: What it looks like. Scaled by ``size``.
     :type image: Pygame.Surface
     :param rect: The rectangle, mostly used for :meth:`move` and collision checks. Shortcut to ``self.image.get_rect()``.
     :type rect: Pygame.Rect
     """
-    # TODO explain speed
     def __init__(self, energy, speed, size):
         """Decorator function where counters are set to 0 and image is properly set."""
 
@@ -76,7 +75,7 @@ class Entity(pg.sprite.Sprite):
         If the condition ``direction_counter >= counter_check`` is true, choose a direction to go to and
         reset the counter.
 
-        This works by using Pygame's Rect_ magic, incrementing "coordinate attributes" to move.
+        This works by using PyGame's Rect_ magic, incrementing "coordinate attributes" to move.
         If movement would collide with the border, the counter is set to the check value so that a new
         direction can be chosen next turn.
         """
@@ -123,14 +122,13 @@ class Entity(pg.sprite.Sprite):
         then a new class instance is created. For this new class instance:
 
         - **Energy** is equal to ``greatest_cost * 2`` (simulating the parents giving their own share)
-        - **Speed** and **Size** are equal to a mean value of the parents' values, ``+-gene_variation`` (simulating mutation)
+        - **Speed** and **Size** are equal to a mean value of the parents' values, ``+-randint(min_gene_variation, max_gene_vaiation)``
 
         The actual "birth" is done in :meth:`EntityGroup.populate` by calling it in this method.
-        After that, relevant attributes are (de/in)cremented.
 
-        :param entity_group: Group of entities
+        :param entity_group: Group of entities.
         :type entity_group: EntityGroup
-        :param birth_marker_group: Group of birth markers
+        :param birth_marker_group: Group of birth markers.
         :type birth_marker_group: MarkerGroup
         """
         partners = pg.sprite.spritecollide(self, entity_group, dokill=False)
@@ -171,7 +169,7 @@ class Entity(pg.sprite.Sprite):
 
         Check for collisions with ``food_group``,
         kill any food sprite matches,
-        give set energy amount for each match.
+        give :data:`config.food_energy` for each match.
 
         :param food_group: Group of foods
         :type food_group: FoodGroup
@@ -183,7 +181,7 @@ class Entity(pg.sprite.Sprite):
     def die(self, entity_group, starve_marker_group):
         """Die from starvation if conditions are met.
 
-        Starve (:class:`Marker`) is set if death occurs.
+        Starve :class:`Marker` is set if death occurs.
 
         :param entity_group: Group of entities.
         :type entity_group: EntityGroup
@@ -197,9 +195,9 @@ class Entity(pg.sprite.Sprite):
     def modify_values(self):
         """Update all relevant attributes.
 
-        Energy is drained with a formula that is a function of speed and size``.
+        Energy is drained with a formula that is a function of ``speed`` and ``size`` (:data:`config.energy_drain_formula`)
         Mating and age counters are incremented by 1.
-        Direction counter is incremented by an interval set in ``config.py``.
+        Direction counter is incremented by an integer in a random interval (:data:`config.direction_counter_increment`)
         """
         self.energy -= formula(cfg.energy_drain_formula, speed=self.speed, size=self.size)
         self.mating_counter += 1
@@ -212,11 +210,11 @@ class Entity(pg.sprite.Sprite):
 
         :param entity_group: Group of entities.
         :type entity_group: EntityGroup
-        :param food_group: Group of foods
+        :param food_group: Group of foods.
         :type food_group: FoodGroup
-        :param birth_marker_group: Group of birth markers
+        :param birth_marker_group: Group of birth markers.
         :type birth_marker_group: MarkerGroup
-        :param starve_marker_group: Group of starve markers
+        :param starve_marker_group: Group of starve markers.
         :type starve_marker_group: MarkerGroup
         """
         self.move()
@@ -253,8 +251,8 @@ class EntityGroup(pg.sprite.Group):
         :type energy: int
         :param birth_marker_group: Group of birth markers
         :type birth_marker_group: MarkerGroup
-        :param kwargs: Passes other misc. parameters to Entity, such as speed and size.
-        :type kwargs: int
+        :param kwargs: Passes other parameters to :class:`Entity`, such as ``speed`` and ``size``.
+        :type kwargs: int, optional
         """
         n = 1 if placement is not None else cfg.start_amount
 
@@ -280,7 +278,6 @@ class EntityGroup(pg.sprite.Group):
         :param elapsed: In seconds, how long since the program started.
         :type elapsed: int
         """
-
         self.statistics_counter += 1
 
         if self.statistics_counter == cfg.statistics_counter_roof:
@@ -310,9 +307,9 @@ class EntityGroup(pg.sprite.Group):
 
         This method does three things:
 
-        - Call each of the entities' :meth:`update` to do their actions
-        - Save their attributes to file with :meth:`save_to_file`
-        - Draw them on the screen
+        - Call each of the entities' ``update()`` method to do their actions (:meth:`Entity.update`).
+        - Save their attributes to file with :meth:`save_to_file`.
+        - Draw them on the screen.
 
         :param run: What run the program is on. Will be ``None`` if program is not called from ``simulate.py``.
         :type run: int or None
@@ -320,11 +317,11 @@ class EntityGroup(pg.sprite.Group):
         :type elapsed: int
         :param entity_group: Group of entities.
         :type entity_group: EntityGroup
-        :param food_group: Group of foods
+        :param food_group: Group of foods.
         :type food_group: FoodGroup
-        :param birth_marker_group: Group of birth markers
+        :param birth_marker_group: Group of birth markers.
         :type birth_marker_group: MarkerGroup
-        :param starve_marker_group: Group of starve markers
+        :param starve_marker_group: Group of starve markers.
         :type starve_marker_group: MarkerGroup
         """
         # TODO update docs
@@ -337,9 +334,10 @@ class Food(pg.sprite.Sprite):
     """Class for a food object.
 
     .. _Sprite: https://www.pygame.org/docs/ref/sprite.html
+    .. _Group: https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Group
 
-    This is a subclass of Pygame's Sprite_ class, but much simpler than :class:`Entity`.
-    Its only purpose is be spawned by its group (:class:`FoodGroup`) and eaten by an entity.
+    This is a subclass of PyGame's Sprite_ class, but much simpler than :class:`Entity`.
+    Its only purpose is be spawned by its PyGame Group_ (:class:`FoodGroup`) and eaten by an :class:`Entity`.
 
     :param image: What it looks like. Scaled by ``size``.
     :type image: Pygame.Surface
@@ -359,7 +357,7 @@ class FoodGroup(pg.sprite.Group):
 
     This container is a subclass of Pygame's Group_. Mainly of importance to spawn in the food.
 
-    :param spawn_counter: Counts up to ``spawn_counter_roof`` and then spawns the entities.
+    :param spawn_counter: Counts up to :data:`config.food_spawn_counter_roof` by random integer in interval :data:`config.food_spawn_counter_increment`.
     :type spawn_counter: int
     """
     def __init__(self):
@@ -367,9 +365,9 @@ class FoodGroup(pg.sprite.Group):
         self.spawn_counter = 0
 
     def spawn(self):
-        """Spawn n amount of food, where ``n = food_amount`` from ``config.py``.
+        """Spawn :data:`config.food_amount` amount of food.
 
-        Similar to :meth:`Entity.populate` but more simple and niche for a special use case.
+        Similar to :meth:`Entity.populate` but much simpler.
         """
         if self.spawn_counter >= cfg.food_spawn_counter_roof:
             for _ in range(cfg.food_amount):
@@ -399,21 +397,21 @@ class Marker(pg.sprite.Sprite):
     - **starve**: die of lack of energy
     - **birth**: be instantiated
 
-    :param marked_sprite: The marked sprite, used to inherit the dimensions and placement of the sprite.
+    :param marked_sprite: The marked Sprite_, used to inherit the dimensions and placement.
     :type marked_sprite: Pygame.Sprite
     :param duration_counter: Elapsed duration.
     :type duration_counter: int
-    :param duration_counter_roof: When ``duration_counter == duration_counter_roof, the marker is removed``.
+    :param duration_counter_roof: When ``duration_counter == duration_counter_roof``, the marker is removed.
     :type duration_counter_roof: int
-    :param color: Color of the image in the format of (R, G, B)
+    :param color: (R, G, B) color of the image.
     :type color: tuple
-    :param image: What it looks like (single-color . Scaled by ``marked_sprite.size``.
+    :param image: What it looks like (single-color) . Scaled by ``marked_sprite.size``.
     :type image: Pygame.Rect
     :param rect: The rectangle representation of the class. Equivalent of ``self.image`` in this particular class.
     :type rect: Pygame.Rect
     """
     def __init__(self, marked_sprite, duration_counter_roof, color):
-        """Constructor method"""
+        """Constructor method."""
         super().__init__()
         self.marked_sprite = marked_sprite
         self.duration_counter = 0

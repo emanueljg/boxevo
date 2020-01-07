@@ -1,8 +1,9 @@
 """Start the 2D-evolution environment and populate it with sprites.
 
-This can be run by both itself and ``simulate.py``, for multiple tests.
+This can be run by both itself and :mod:`simulate`, for multiple tests.
 
-Almost all of the GUI functionality is abstracted away either by `PyGame <https://www.pygame.org>` or :mod:`gui`,
+
+Almost all of the GUI functionality is abstracted away either by `PyGame <https://www.pygame.org>`_ or :mod:`gui`,
 leaving space for all of the project-specific logic.
 
 Almost all of the runtime behaviour for this module and all others are made unique by the :mod:`config`.
@@ -24,14 +25,15 @@ def main():
 
     All of the :mod:`sprite` objects and its groups are instantiated here.
 
-    The main event loop is set to run at a constant pace of 60 frames per second but
+    The main event loop is set to run at a constant pace of 60 frames per second by default but
     because of bottlenecks (mainly rendering), the actual game speed will slow down as more
     :class:`sprite.Entity` objects become active.
 
     "Actions" of the :class:`sprite.Entity` (such as :meth:`sprite.Entity.move`) and other :mod:`sprite` subclasses
     are carried out by calling their respective group's ``loop`` method, which in their turn
     call each of the individual sprite's ``update`` method.
-    See: :meth:`sprite.EntityGroup.loop` and :meth:`sprite.Entity.update`.
+
+    .. seealso:: :meth:`sprite.EntityGroup.loop` and :meth:`sprite.Entity.update`.
     """
     run = None if len(argv) == 1 else argv[1]
 

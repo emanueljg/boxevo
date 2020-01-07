@@ -1,5 +1,4 @@
-"""This module handles abstracted-away gui methods related to `PyGame <https://www.pygame.org>`."""
-
+"""This module handles abstracted-away gui methods related to `PyGame <https://www.pygame.org>`_."""
 
 import pygame as pg
 from os import environ
@@ -12,7 +11,7 @@ cfg = get_cfg()
 def prep():
     """Initial preparations for the main window.
 
-    Dimensions will be manually or dynamically set depending on ``config.py``.
+    Dimensions will be dynamically set if :data:`config.py.manual_dims` is None, statically otherwise.
     """
     pg.init()
     environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" % (0, cfg.window_roof_offset)
@@ -28,7 +27,7 @@ def prep():
 
 
 def get_screen() -> pg.Surface:
-    """Get the PyGame display surface.
+    """Get the PyGame `display <https://www.pygame.org/docs/ref/display.html>`_ `surface <https://www.pygame.org/docs/ref/surface.html>`_.
 
     :return: The display surface.
     :rtype: PyGame.Surface
@@ -37,11 +36,12 @@ def get_screen() -> pg.Surface:
 
 
 def draw_border() -> pg.Rect:
-    """Draw the PyGame border rect and return it.
+    """Draw the PyGame border `rect <https://www.pygame.org/docs/ref/rect.html>`_ and return it.
 
-    The border rect will be drawn as a border, not an opaque rectangle.
+    The border rect_ will be drawn as a border, not an opaque rectangle.
 
-    :return: The border rect.
+    :return: The border rect_.
+    :rtype: PyGame.Rect
     """
     width, height = get_screen().get_size()
     return pg.draw.rect(get_screen(),
