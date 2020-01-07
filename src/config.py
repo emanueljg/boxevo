@@ -1,9 +1,6 @@
-"""Config file.
+"""A module containing all variables that modify the behaviour of most modules."""
 
-|
-
-  **Entity**
-"""
+############entity############
 
 #: Amount of entities to first spawn.
 start_amount = 15
@@ -27,9 +24,9 @@ mating_age_counter_roof = 800
 mating_energy_formula = '0.25*energy'
 #: The minimum energy drain from a parent (for when the parent's energy is too low)
 mating_energy_formula_min = 1000
-#: How much the average of the parent's speed genes are shifted.
+#: (min, max) of how much the average of the parent's speed genes are shifted.
 speed_variation = (2, 4)
-#: How much the average of the parent's size genes are shifted.
+#: (min, max) of how much the average of the parent's size genes are shifted.
 size_variation = (2, 4)
 #: Random (min, max) range of how much the direction counter is incremented by.
 direction_counter_increment = (1, 10)
@@ -42,15 +39,7 @@ min_size = 1
 #: Image of the entity.
 entity_image = 'entity.png'
 
-
-"""
-
-|
-|
-|
-
-**Food**
-"""
+############food############
 
 #: How big a food sprite is.
 food_size = 10
@@ -63,14 +52,7 @@ food_spawn_counter_increment = (2, 5)
 #: Image of the food sprite.
 food_image = 'food.png'
 
-"""
-
-|
-|
-|
-
-**Markers**
-"""
+############marker############
 
 #: How long the starve marker stays up.
 starve_marker_duration = 22
@@ -81,15 +63,7 @@ birth_marker_duration = 22
 #: Color of the birth marker.
 birth_marker_color = (0, 255, 0)
 
-
-"""
-
-|
-|
-|
-
-**Statistics**
-"""
+############graph############
 
 #: In seconds, how big the statistics counter has to be to save the current values of the entities' genes.
 statistics_counter_roof = 100
@@ -102,15 +76,7 @@ title_format = 'KEY, medelvärde'
 #: File name of an average graph.
 fname_format = 'KEY, medelvärde'
 
-
-"""
-
-|
-|
-|
-
-**GUI**
-"""
+############gui############
 
 #: (width, height) of the GUI.
 manual_dims = (1540, 863)
@@ -133,15 +99,7 @@ border_thick = 3
 #: Border rect color.
 border_color = (255, 255, 255, 255)  # White
 
-
-"""
-
-|
-|
-|
-
-**Simulation**
-"""
+############simulation############
 
 #: The format of the simulation directory.
 dir_format = '%a %H.%M, %d %b'
@@ -151,6 +109,3 @@ exe = 'startworld.exe'
 runs = 2
 #: In seconds, the duration of each run.
 duration = 600
-
-
-

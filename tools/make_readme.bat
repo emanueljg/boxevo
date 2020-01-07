@@ -10,3 +10,5 @@ del README.md
 ren README_temp.md README.md
 
 git add README.md
+
+cd tools
