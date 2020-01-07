@@ -28,9 +28,12 @@ Link to .zip: https://github.com/NihilistBrew/boxevo/archive/master.zip
 REM from tools\get_simulation.bat
 
 @echo off
+
 rd /s /q simulation
+
 curl -L -O https://codeload.github.com/NihilistBrew/boxevo/zip/master
 tar xf master
+
 xcopy boxevo-master\simulation simulation /i /s
 rd /s /q boxevo-master
 del master
@@ -120,4 +123,4 @@ License
 -------
 
 This project is licensed under the GNU General Public License v3.0 - see
-`license.md` for details. 
+`LICENSE.md` for details. 
