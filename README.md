@@ -61,10 +61,6 @@ created.
 After having cloned or downloaded the repository, run
 `build_simulation`.
 
-**NOTE**: If you want to run the script through the command line, the
-current working directory **has** to be `tools` or one directory above
-it, i.e **the repository directory!**
-
 Usage
 -----
 

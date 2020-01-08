@@ -5,7 +5,7 @@
 #: Amount of entities to first spawn.
 start_amount = 15
 #: A random interval of the start size of entities.
-start_size = (30, 60)
+start_size = (30, 40)
 #: A random interval (min, max) of the start speed of entities
 start_speed = (3, 6)
 #: How much energy the entities start with.
@@ -107,6 +107,6 @@ dir_format = '%a %H.%M, %d %b'
 #: Name of the main executable file.
 exe = 'startworld.exe'
 #: How many times the program is run.
-runs = 2
+runs = 10
 #: In seconds, the duration of each run.
-duration = 600
+duration = 1800

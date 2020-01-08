@@ -1,8 +1,7 @@
 @echo off
 SETLOCAL EnableDelayedExpansion
 
-for %%I in (.) do set base=%%~nxI
-if not "!base!"=="tools" (cd tools)
+cd /D "%~dp0"
 
 call make_simulation
 call make_config_doc
