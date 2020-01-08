@@ -48,6 +48,7 @@ def main():
             all_v = re.findall('\d+(?=\|)', data)
             if not not graphs:
                 for k in all_k:
+                    print(k)
                     translated = cfg.var_translation[k]
                     graphs[translated] = {}
 
