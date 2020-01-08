@@ -13,3 +13,5 @@ del README.md
 ren README_temp.md README.md
 
 cd tools
+
+ENDLOCAL

@@ -15,3 +15,5 @@ copy src\config.py simulation\bundle
 xcopy resources simulation\bundle /i
 
 cd tools
+
+ENDLOCAL
