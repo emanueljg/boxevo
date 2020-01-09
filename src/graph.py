@@ -27,9 +27,16 @@ def construct_graph(x, y, title, fname, **kwargs):
         title = title.replace(to_translate, translation)
         fname = fname.replace(to_translate, translation)
 
-    plt.ylim(0, cfg.ylims[kwargs['KEY']])
+    k = kwargs['KEY']
+
+    if k in cfg.scaled_vars:
+        y = [int(i // cfg.scaled_vars[k]) for i in y]
+
+    plt.ylim(0, cfg.ylims[k])
     plt.plot(x, y)
     plt.title(title)
+    plt.xlabel(cfg.axis_labels['x'])
+    plt.ylabel(cfg.axis_labels[k])
     plt.savefig(fname + '.png')
     plt.close()
 
@@ -46,7 +53,7 @@ def main():
             all_x = re.findall('\d+(?=:)', data)
             all_k = re.findall('[a-z]+', data[0:data.find('\n')])
             all_v = re.findall('\d+(?=\|)', data)
-            if not not graphs:
+            if not graphs:
                 for k in all_k:
                     print(k)
                     translated = cfg.var_translation[k]

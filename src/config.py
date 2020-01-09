@@ -70,10 +70,14 @@ birth_marker_color = (0, 255, 0)
 statistics_counter_roof = 100
 #: Translation for evolution variables.
 var_translation = {'speed': 'hastighet', 'size': 'storlek', 'energy': 'energi', 'amount': 'antal'}
+#: Variables that should be scaled. The new var will be the old var divided by these values.
+scaled_vars = {'energi': 1000}
 #: Max y limits for the graphs.
-ylims = {'hastighet': 30, 'storlek': 50, 'energi': start_energy, 'antal': 300}
+ylims = {'hastighet': 10, 'storlek': 40, 'energi': 200, 'antal': 300}
 #: Title of an average graph.
 title_format = 'KEY, medelvärde'
+#: Labels of the x and y axis.
+axis_labels = {'x': 'Tid (s)', 'hastighet': 'Hastighet', 'storlek': 'Storlek', 'energi': 'Energi (i tusental)', 'antal': 'Antal'}
 #: File name of an average graph.
 fname_format = 'KEY, medelvärde'
 
