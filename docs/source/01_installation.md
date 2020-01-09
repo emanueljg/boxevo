@@ -14,7 +14,7 @@ Link to .zip: https://github.com/NihilistBrew/boxevo/archive/master.zip
 
 #### Using get\_simulation.bat
 
-**This will wipe an already existing `simulation` directory!**
+**This will wipe an already existing ``simulation`` directory!**
 
 -   Create a `.txt` file and paste the following into it:
 
@@ -46,7 +46,7 @@ process is done, subsequently closing the command prompt.
 
 #### Using build\_simulation.bat
 
-**This will wipe an already existing `simulation` directory!**
+**This will wipe an already existing ``simulation`` directory!**
 
 If you want to, you can compile the `simulation` directory and its
 content straight from source. A new `simulation` directory will be
