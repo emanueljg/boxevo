@@ -20,8 +20,8 @@ things you can tweak before running the simulation:
 -   To change the images of the sprites:
     -   Copy and paste an image of either an entity or a food sprite, or
         an image to be used as both.
-    -   Change the relevant config variables (`entity_img` and/or
-        `food_img`) to match the file name of the new images.
+    -   Change the relevant config variables (`cfg.entity_image` and/or
+        `food_image`) to match the file name of the new images.
     -   Done!
 
 #### Running
@@ -33,17 +33,23 @@ options:
 
     -   This will create a single world populated by sprites that run
         for as long as the program is opened.
-    -   No statistics are generated.
+    -   The run will create a single text file with evolutionary data, named `val.txt`.
+    -   Beyond the `val.txt`, no statistics/graphing will be generated.
 
 2.  Run `simulation\simulate.exe`.
 
-    -   This will run `startworld.exe` for as many times and as long as
+    -   This will run `startworld.exe` for as many times (`cfg.runs`) and as long (`cfg.duration`) as
         specified in the config.
     -   Each execution creates a dated directory which contains all of
         the runs spawned by one execution of `simulate.exe`.
     -   Each run will generate a text file with evolutionary data, named
         `val(run).txt`.
     -   These `val.txt` files are in turn read by a graphing tool, which
-        creates a graph `.png` for each evolutionary trait, where all of
-        the data points are averages across all runs for that specific
-        trait.
+        generates several things.
+        -   Each run gets a graph of the averages of the different evolutionary traits.
+            This graph is by default (`cfg.run_fname_format`) saved as `RUN, KEY.png`, where `RUN = run number` and 
+            `KEY = evolutionary trait`. 
+        -   Each evolutionary trait also gets a graph describing its average progression across all runs, in essence being
+            *"an average of an average"*. This graph is by default (`cfg.avg_fname_format`) saved as `KEY, medelvärde.png`.
+        -   Lastly, if `cfg.avg_tables == True`, text files corresponding to the "average of the average" graphs are created, 
+            containing all of the data points. These files are saved by default (`cfg.avg_table_fname`) as `KEY.txt`.

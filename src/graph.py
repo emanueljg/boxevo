@@ -55,14 +55,19 @@ def main():
             all_v = re.findall('\d+(?=\|)', data)
             if not graphs:
                 for k in all_k:
-                    print(k)
                     translated = cfg.var_translation[k]
                     graphs[translated] = {}
 
         for k_place, k in enumerate(all_k):
-            k_vals = [v for val_place, v in enumerate(all_v) if val_place % len(all_k) == k_place]
+            k_vals = [int(v) for val_place, v in enumerate(all_v) if val_place % len(all_k) == k_place]
             k = cfg.var_translation[k]
             run = val.replace('val', '').replace('.txt', '')
+            construct_graph([int(x) for x in all_x],
+                            k_vals,
+                            cfg.run_title_format,
+                            cfg.run_fname_format,
+                            RUN=run,
+                            KEY=k)
             graphs[k][run] = [(x, y) for x, y in zip(all_x, k_vals)]
 
     for k, v in graphs.items():
@@ -76,9 +81,18 @@ def main():
 
         construct_graph(avgs_x,
                         avgs_y,
-                        cfg.title_format,
-                        cfg.fname_format,
+                        cfg.avg_title_format,
+                        cfg.avg_fname_format,
                         KEY=k)
+
+        if cfg.avg_tables:
+            lines = '\n'.join([cfg.avg_table_data_format.replace('X', str(x)).replace('Y', str(y))
+                               for x, y in zip(avgs_x, avgs_y)])
+            with open(cfg.avg_table_fname_format.replace('KEY', k) + '.txt', 'w') as f:
+                f.write(lines)
+
+    if cfg.remove_non_statistics:
+        os.system(f'del {cfg.entity_image} {cfg.food_image} {cfg.exe}')
 
 
 if __name__ == '__main__':

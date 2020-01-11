@@ -74,12 +74,24 @@ var_translation = {'speed': 'hastighet', 'size': 'storlek', 'energy': 'energi', 
 scaled_vars = {'energi': 1000}
 #: Max y limits for the graphs.
 ylims = {'hastighet': 10, 'storlek': 40, 'energi': 200, 'antal': 300}
-#: Title of an average graph.
-title_format = 'KEY, medelvärde'
 #: Labels of the x and y axis.
 axis_labels = {'x': 'Tid (s)', 'hastighet': 'Hastighet', 'storlek': 'Storlek', 'energi': 'Energi (i tusental)', 'antal': 'Antal'}
-#: File name of an average graph.
-fname_format = 'KEY, medelvärde'
+#: If a `.txt` file containing the data points of an average graph should be generated.
+avg_tables = True
+#: Title format of a run graph.
+run_title_format = 'KEY, körning RUN'
+#: File name format of a run graph.
+run_fname_format = 'RUN, KEY'
+#: Title format of an average graph.
+avg_title_format = 'KEY, medelvärde'
+#: File name format of an average graph.
+avg_fname_format = 'KEY, medelvärde'
+#: File name format of an average graph table file.
+avg_table_fname_format = 'KEY'
+#: Data format of an average graph table file.
+avg_table_data_format = 'X,Y'
+#: Delete non-statistics files after making the graphs.
+remove_non_statistics = True
 
 ############gui############
 
