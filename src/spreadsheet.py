@@ -1,6 +1,6 @@
 """This module creates a spreadsheet of simulation stats.
 
-Can run from :mod:`graph` if enabled in config (`cfg.enable_spreadsheet`), or run manually as a standalone executable.
+Can run from :mod:`graph` if enabled in config (``cfg.enable_spreadsheet``), or run manually as a standalone executable.
 """
 
 import xlsxwriter
@@ -16,8 +16,8 @@ def data_time_trunc(x, y):
 
     :param x: The time array.
     :type x: list, tuple
-    :param x: The target array.
-    :type x: list, tuple
+    :param Y: The target array.
+    :type Y: list, tuple
     :return: The truncated array as a list.
     :rtype: list
     """
