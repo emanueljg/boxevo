@@ -1,11 +1,10 @@
 """This module creates a spreadsheet of simulation stats.
 
-Can run from :mod:`graph` if enabled in cofig (``cfg.enable_spreadsheet``), or run manually as a standalone executable.
+Can run from :mod:`graph` if enabled in config (`cfg.enable_spreadsheet`), or run manually as a standalone executable.
 """
 
 import xlsxwriter
 import os
-from copy import copy
 
 from parsing import get_cfg, parse_val
 
