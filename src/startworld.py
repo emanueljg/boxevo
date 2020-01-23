@@ -13,7 +13,7 @@ import pygame as pg
 from timeit import default_timer as timer
 from sys import argv
 
-from config_handling import get_cfg
+from parsing import get_cfg
 from gui import prep, get_screen, draw_border
 from sprite import EntityGroup, FoodGroup, MarkerGroup
 

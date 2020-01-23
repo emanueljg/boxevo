@@ -3,7 +3,7 @@
 import pygame as pg
 from os import environ
 
-from config_handling import get_cfg
+from parsing import get_cfg
 
 cfg = get_cfg()
 

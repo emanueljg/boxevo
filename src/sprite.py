@@ -20,7 +20,7 @@ import pygame as pg
 
 from random import randint, choice
 
-from config_handling import get_cfg, formula, prob
+from parsing import get_cfg, formula, prob
 from gui import get_screen, draw_border
 
 cfg = get_cfg()

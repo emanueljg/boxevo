@@ -23,10 +23,11 @@ Modules
    startworld.rst
    sprite.rst
    graph.rst
+   spreadsheet.rst
    simulate.rst
    gui.rst
    config.rst
-   config_handling.rst
+   parsing.rst
 
 Indices and tables
 ------------------

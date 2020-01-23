@@ -117,10 +117,15 @@ options:
             average progression across all runs, in essence being *"an
             average of an average"*. This graph is by default
             (`cfg.avg_fname_format`) saved as `KEY, medelvärde.png`.
-        -   Lastly, if `cfg.avg_tables == True`, text files
-            corresponding to the "average of the average" graphs are
-            created, containing all of the data points. These files are
-            saved by default (`cfg.avg_table_fname`) as `KEY.txt`.
+        -   If `cfg.avg_tables == True`, text files corresponding to the
+            "average of the average" graphs are created, containing all
+            of the data points. These files are saved by default
+            (`cfg.avg_table_fname`) as `KEY, text.txt`.
+        -   Additionally, if `cfg.enable_spreadsheet == True`, a
+            spreadsheet is created from the values of all traits
+            selected in `cfg.spreadsheet_vars`, fetched from `.txt`
+            files in `cfg.to_queue`. `val` files and *"average of
+            average"* files are supported.
 
 Documentation
 -------------

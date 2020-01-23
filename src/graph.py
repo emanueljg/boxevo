@@ -1,10 +1,14 @@
-"""This module handles variable graphing using `matplotlib <https://matplotlib.org/>`_."""
+"""This module handles variable graphing using `matplotlib <https://matplotlib.org/>`_.
+
+It also creates a child process, :mod:`spreadsheet`, if this is enabled in the :mod:`config` (``cfg.enable_spreadsheet``)
+"""
 
 import matplotlib.pyplot as plt
 import re
 import os
+from win32process import CreateProcess, STARTUPINFO
 
-from config_handling import get_cfg
+from parsing import get_cfg, parse_val
 
 cfg = get_cfg()
 
@@ -43,42 +47,32 @@ def construct_graph(x, y, title, fname, **kwargs):
 
 def main():
     """Get data from all of the runs and make a graph for each variable's average."""
-
-    graphs = {}
     vals = [file for file in os.listdir('.') if 'val' in file]
-
+    run_graphs = {}
+    avg_graphs = {}
     for val in vals:
         with open(val, 'r') as f:
-            data = f.read()
-            all_x = re.findall('\d+(?=:)', data)
-            all_k = re.findall('[a-z]+', data[0:data.find('\n')])
-            all_v = re.findall('\d+(?=\|)', data)
-            if not graphs:
-                for k in all_k:
-                    translated = cfg.var_translation[k]
-                    graphs[translated] = {}
-
-        for k_place, k in enumerate(all_k):
-            k_vals = [int(v) for val_place, v in enumerate(all_v) if val_place % len(all_k) == k_place]
-            k = cfg.var_translation[k]
             run = val.replace('val', '').replace('.txt', '')
-            construct_graph([int(x) for x in all_x],
-                            k_vals,
-                            cfg.run_title_format,
-                            cfg.run_fname_format,
+            data = parse_val(f.read())
+            run_graphs[run] = data
+
+    for run, graph in run_graphs.items():
+        for k, v in graph['k'].items():
+            construct_graph(x=graph['x'],
+                            y=v,
+                            title=cfg.run_title_format,
+                            fname=cfg.run_fname_format,
                             RUN=run,
                             KEY=k)
-            graphs[k][run] = [(x, y) for x, y in zip(all_x, k_vals)]
 
-    for k, v in graphs.items():
-        avgs_x = []
-        avgs_y = []
-        for n in range(min([len(v[run]) for run in v])):
-            x_points = [int(v[run][n][0]) for run in v]
-            y_points = [int(v[run][n][1]) for run in v]
-            avgs_x.append(sum(x_points) // len(x_points))
-            avgs_y.append(sum(y_points) // len(y_points))
+            if len(v) < avg_graphs.setdefault(k, {}).setdefault('length', cfg.duration):
+                avg_graphs[k]['length'] = len(v)
+            avg_graphs[k].setdefault('x', []).append(graph['x'])
+            avg_graphs[k].setdefault('y', []).append(v)
 
+    for k, graph in avg_graphs.items():
+        avgs_x = [sum(li) // len(li) for li in [[r[n] for r in graph['x']] for n in range(graph['length'])]]
+        avgs_y = [sum(li) // len(li) for li in [[r[n] for r in graph['y']] for n in range(graph['length'])]]
         construct_graph(avgs_x,
                         avgs_y,
                         cfg.avg_title_format,
@@ -93,6 +87,9 @@ def main():
 
     if cfg.remove_non_statistics:
         os.system(f'del {cfg.entity_image} {cfg.food_image} {cfg.exe}')
+
+    if cfg.enable_spreadsheet:
+        CreateProcess(None, 'spreadsheet.exe', None, None, False, 0, None, None, STARTUPINFO())
 
 
 if __name__ == '__main__':

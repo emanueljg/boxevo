@@ -1,10 +1,11 @@
 """This module runs :mod:`startworld` multiple times and graphs gathered data using :mod:`graph`."""
+
 from win32process import CreateProcess, STARTUPINFO
 from time import strftime, time, sleep
 from os import path, mkdir, system, listdir
 from shutil import copy2, SameFileError
 
-from config_handling import get_cfg
+from parsing import get_cfg
 
 cfg = get_cfg()
 
@@ -30,6 +31,7 @@ def main():
             sleep(1)
 
     CreateProcess(None, path.join(current, "graph.exe"), None, None, False, 0, None, current, STARTUPINFO())
+
 
 
 if __name__ == '__main__':
