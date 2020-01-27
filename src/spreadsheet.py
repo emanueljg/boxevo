@@ -11,6 +11,14 @@ from parsing import get_cfg, parse_val
 cfg = get_cfg()
 
 
+def _sort_files(i):
+    numbers = ''.join(filter(str.isdigit, i))
+    if numbers:
+        return int(numbers)
+    else:
+        return 0  # Average values
+
+
 def data_time_trunc(x, y):
     """Shorten an array `y` with corresponding values of the time array `x` to only show values for whole minutes.
 
@@ -37,6 +45,7 @@ def main():
     # Find files to be made into a spreadsheet and build queue -----------------------------------------
 
     texts = [file for file in os.listdir('.') if file.replace('.txt', '') in cfg.to_queue]
+    texts.sort(key=_sort_files)
     queue = {}
 
     for text in texts:
@@ -66,7 +75,7 @@ def main():
 
     # Create spreadsheet file and setup everything -----------------------------------------
 
-    wb = xlsxwriter.Workbook('spreadsheet.xlsx')
+    wb = xlsxwriter.Workbook(f'{cfg.spreadsheet_name}.xlsx')
     ws = wb.add_worksheet()
 
     title_format = wb.add_format({**cfg.spreadsheet_format, 'border': 1})

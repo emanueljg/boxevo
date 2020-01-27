@@ -121,8 +121,10 @@ border_color = (255, 255, 255, 255)  # White
 #: Enables spreadsheet.exe to be run from :mod:`graph`.
 #: This does not mean it can't be run manually though!
 enable_spreadsheet = True
+#: File name of the spreadsheet.
+spreadsheet_name = 'spreadsheet'
 #: ``.txt`` files to make table(s) out of.
-to_queue = ('val1', 'val2', 'hastighet', 'storlek')
+to_queue = ('val1', 'val2', 'val3', 'val4', 'hastighet', 'storlek')
 #: Variables to use in the tables.
 spreadsheet_vars = ('hastighet', 'storlek')
 #: Title of the spreadsheet x column.
