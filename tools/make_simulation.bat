@@ -9,7 +9,7 @@ md simulation\bundle
 
 pyinstaller src\simulate.py --distpath simulation --onefile
 pyinstaller src\startworld.py --distpath simulation\bundle --onefile
-pyinstaller src\graph.py --distpath simulation\bundle --onefile
+pyinstaller src\graph.py --distpath simulation\bundle --hidden-import pkg_resources.py2_warn --onefile
 pyinstaller src\spreadsheet.py --distpath simulation\bundle --onefile
 
 
