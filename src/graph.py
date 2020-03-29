@@ -38,7 +38,7 @@ def construct_graph(x, y, title, fname, **kwargs):
 
     plt.ylim(0, cfg.ylims[k])
     plt.plot(x, y)
-    plt.title(title)
+    plt.title(title.capitalize())
     plt.xlabel(cfg.axis_labels['x'])
     plt.ylabel(cfg.axis_labels[k])
     plt.savefig(fname + '.png')
