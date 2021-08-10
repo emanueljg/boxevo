@@ -96,21 +96,21 @@ remove_non_statistics = True
 ############gui############
 
 #: (width, height) of the GUI.
-manual_dims = (1540, 863)
+manual_dims = (1920, 1080)
 #: Frames per second. Idealized value. In reality, it will become smaller due to the program bottlenecking.
 fps = 60
 #: Pixels that the window roof is shrunk down by.
 window_roof_offset = 31
 #: Pixels that the window floor is elevated by.
-window_floor_offset = 40
+window_floor_offset = 31
 #: Pixels that the border rect roof is shrunk down by.
 border_roof_offset = 18
 #: Pixels that the border rect is shifted to the right by.
-border_left_offset = 14
+border_left_offset = 16
 #: Ratio of (border width)/(window width).
-border_width_factor = 0.99
+border_width_factor = 0.98
 #: Ratio of (border height)/(window height).
-border_height_factor = 0.98
+border_height_factor = 0.97
 #: Border rect line thickness.
 border_thick = 3
 #: Border rect color.
